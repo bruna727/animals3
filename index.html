@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acervo Animal</title>
+    <!-- Adicione a fonte Road Rage -->
+    <link href="https://fonts.googleapis.com/css2?family=Road+Rage&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos gerais */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0e4d7;
+        }
+
+        /* Barra de navegação */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #d98e04;
+            padding: 20px;
+            color: white;
+            flex-wrap: wrap;
+        }
+
+        .search-container {
+            position: relative;
+            flex: 1;
+            max-width: 450px;
+            margin: 10px 0;
+        }
+
+        .navbar input[type="text"] {
+            padding: 10px;
+            border-radius: 4px;
+            border: none;
+            width: 100%;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #d98e04;
+        }
+
+        .user-options {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .user-options a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Menu de categorias */
+        .categories {
+            display: flex;
+            justify-content: center;
+            background-color: #d98e04;
+            padding: 10px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .categories a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Dropdown para subcategorias */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 4;
+        }
+
+        .category:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Banner central */
+        .banner {
+            position: relative;
+            text-align: center;
+            padding: 20px 0;
+            background-color: #fff4e3;
+            overflow: hidden;
+        }
+
+        .banner-images {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .banner-images img {
+            height: auto;
+            max-width: 150px;
+            border-radius: 5px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .banner-text h1 {
+            font-family: 'Road Rage', sans-serif;
+            font-size: 3em;
+            color: white;
+            text-shadow: -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000, 3px 3px 0 #000;
+        }
+
+        .banner-text p {
+            font-size: 1.5em;
+            color: white;
+            text-shadow: -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000, 3px 3px 0 #000;
+            font-weight: bold;
+        }
+
+        /* Seção de filtros */
+        .filters {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .filter-options {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .filter-item {
+            text-align: center;
+            font-size: 0.9em;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .filter-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 5px;
+        }
+
+        /* Botão da seta */
+        .arrow {
+            background-color: #d98e04;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+
+        /* Estilos do rodapé */
+        .footer {
+            background-color: #f5be58;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 1em;
+        }
+
+        /* Estilos para o parágrafo "MAIS PESQUISADOS" */
+        .mais-pesquisados {
+            font-size: 2em;
+            color: #d98e04;
+            text-align: center;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        /* Estilos responsivos */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .categories {
+                flex-direction: column;
+                align-items: center;
+                gap: 5px;
+            }
+
+            .banner-text h1 {
+                font-size: 2em;
+            }
+
+            .banner-text p {
+                font-size: 1em;
+            }
+
+            .filter-image {
+                width: 90px;
+                height: 90px;
+            }
+
+            .mais-pesquisados {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de navegação -->
+    <header>
+        <div class="navbar">
+            <div class="logo">www.url.com</div>
+            <div class="search-container">
+                <input type="text" placeholder="Pesquise um animal">
+                <span class="search-icon">🔍</span>
+            </div>
+            <div class="user-options">
+                <a href="#">Entrar</a> | <a href="#">Cadastrar-se</a>
+                <span class="user-icon">👤</span>
+            </div>
+        </div>
+
+        <!-- Menu de categorias -->
+        <nav class="categories">
+            <div class="category">
+                <a href="#">Mamíferos</a>
+                <div class="dropdown-content">
+                    <a href="#">Furãos</a>
+                    <a href="#">Ouriços</a>
+                    <a href="#">Hamsters</a>
+                </div>
+            </div>
+            <div class="category">
+                <a href="#">Aves</a>
+                <div class="dropdown-content">
+                    <a href="#">Canários</a>
+                    <a href="#">Papagaios</a>
+                </div>
+            </div>
+            <a href="#">Anfíbios</a>
+            <a href="#">Peixes</a>
+        </nav>
+    </header>
+
+    <!-- Banner central -->
+    <section class="banner">
+        <div class="banner-images">
+            <img src="animal1.jpg" alt="Animal 1">
+            <img src="animal2.jpg" alt="Animal 2">
+            <img src="animal3.jpg" alt="Animal 3">
+        </div>
+        <div class="banner-text">
+            <h1>Bem-vindo(a)!</h1>
+            <p>Aqui no Acervo Animal você encontra todas as informações sobre animais.</p>
+        </div>
+    </section>
+
+    <!-- Título da seção de filtros -->
+    <p class="mais-pesquisados">MAIS PESQUISADOS</p>
+
+    <!-- Seção de Filtros -->
+    <section class="filters">
+        <div class="filter-options">
+            <div class="filter-item">
+                <img src="primata.jpg" alt="Primatas" class="filter-image">
+                Primatas
+            </div>
+            <div class="filter-item">
+                <img src="ourico.jpg" alt="Ouriços" class="filter-image">
+                Ouriços
+            </div>
+            <div class="filter-item">
+                <a href="araras.html" style="display: flex; flex-direction: column; align-items: center;">
+                    <img src="arara.jpg" alt="Araras" class="filter-image">
+                    Araras
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <p>&copy; 2024 Acervo Animal. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
